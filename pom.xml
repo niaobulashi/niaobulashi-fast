@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.niaobulashi</groupId>
+    <artifactId>niaobulashi-fast</artifactId>
+    <version>1.0.0</version>
+
+    <name>niaobulashi</name>
+    <url>https://fast.niaobulashi.com</url>
+    <description>鸟不拉屎管理系统V2</description>
+
+    <properties>
+        <niaobulashi.version>1.0.0</niaobulashi.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>12</java.version>
+    </properties>
+
+
+
+    <!-- 依赖声明，主要管理版本 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot的依赖配置-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.1.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <!-- 核心模块-->
+            <dependency>
+                <groupId>com.niaobulashi</groupId>
+                <artifactId>niaobulashi-framework</artifactId>
+                <version>${niaobulashi.version}</version>
+            </dependency>
+
+            <!-- 系统模块-->
+            <dependency>
+                <groupId>com.niaobulashi</groupId>
+                <artifactId>niaobulashi-system</artifactId>
+                <version>${niaobulashi.version}</version>
+            </dependency>
+
+            <!-- 通用工具-->
+            <dependency>
+                <groupId>com.niaobulashi</groupId>
+                <artifactId>niaobulashi-common</artifactId>
+                <version>${niaobulashi.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!--模块-->
+    <modules>
+        <module>niaobulashi-admin</module>
+        <module>niaobulashi-common</module>
+        <module>niaobulashi-framework</module>
+        <module>niaobulashi-system</module>
+    </modules>
+    <!--父类型都用pom-->
+    <packaging>pom</packaging>
+
+    <!--指定项目源码的jdk版本-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
