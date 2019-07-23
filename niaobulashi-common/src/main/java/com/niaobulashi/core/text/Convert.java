@@ -35,6 +35,8 @@ public class Convert {
      * 14.转换为Enum对象
      * 15.转换为BigInteger
      * 16.转换为BigDecimal
+     * 17.将对象转换为字符串
+     * 18.
      */
 
     /**
