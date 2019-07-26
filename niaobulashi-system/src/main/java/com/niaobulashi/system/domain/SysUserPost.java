@@ -5,17 +5,18 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @program: niaobulashi-fast
- * @description: 用户和角色关联 sys_user_role
+ * @description: 用户和岗位关联 sys_user_post
  * @author: 鸟不拉屎 https://niaobulashi.com
- * @create: 2019-07-23 23:11
+ * @create: 2019-07-26 23:42
  */
-public class SysUserRole {
+public class SysUserPost {
 
     /** 用户ID */
     private Long userId;
 
-    /** 角色ID */
-    private Long roleId;
+    /** 岗位ID */
+    private Long postId;
+
 
     public Long getUserId() {
         return userId;
@@ -25,19 +26,19 @@ public class SysUserRole {
         this.userId = userId;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("userId", getUserId())
-                .append("roleId", getRoleId())
+                .append("postId", getPostId())
                 .toString();
     }
 }

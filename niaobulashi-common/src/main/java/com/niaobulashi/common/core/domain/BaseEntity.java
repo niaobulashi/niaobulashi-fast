@@ -1,4 +1,4 @@
-package com.niaobulashi.core.domain;
+package com.niaobulashi.common.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

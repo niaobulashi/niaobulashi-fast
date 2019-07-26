@@ -1,6 +1,5 @@
 package com.niaobulashi.system.domain;
 
-import com.niaobulashi.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -10,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-23 23:20
  */
-public class SysRoleMenu extends BaseEntity {
+public class SysRoleMenu {
 
     /** 角色ID */
     private Long roleId;

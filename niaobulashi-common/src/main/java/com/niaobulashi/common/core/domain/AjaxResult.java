@@ -1,7 +1,7 @@
-package com.niaobulashi.core.domain;
+package com.niaobulashi.common.core.domain;
 
 
-import com.niaobulashi.utils.StringUtils;
+import com.niaobulashi.common.utils.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -204,13 +204,12 @@ public class AjaxResult extends HashMap<String, Object> {
     }
 
 
-
-    /*@Override
+    @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
                 .append("code", getCode())
                 .append("msg", getMsg())
                 .append("data", getData())
                 .toString();
-    }*/
+    }
 }

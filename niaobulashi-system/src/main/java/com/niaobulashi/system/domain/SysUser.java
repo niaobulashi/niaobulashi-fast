@@ -1,6 +1,6 @@
 package com.niaobulashi.system.domain;
 
-import com.niaobulashi.core.domain.BaseEntity;
+import com.niaobulashi.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

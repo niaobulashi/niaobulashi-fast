@@ -2,6 +2,7 @@ package com.niaobulashi.controller.system;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @program: niaobulashi-fast
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SysIndexController {
 
     @GetMapping("/index")
+    @ResponseBody
     public String index() {
         return "index";
     }

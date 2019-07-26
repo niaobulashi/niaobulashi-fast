@@ -1,6 +1,6 @@
-package com.niaobulashi.core.text;
+package com.niaobulashi.common.core.text;
 
-import com.niaobulashi.utils.StringUtils;
+import com.niaobulashi.common.utils.StringUtils;
 
 /**
  * @program: niaobulashi-fast

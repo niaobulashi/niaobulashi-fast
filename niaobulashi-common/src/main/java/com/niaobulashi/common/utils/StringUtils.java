@@ -1,7 +1,7 @@
-package com.niaobulashi.utils;
+package com.niaobulashi.common.utils;
 
 
-import com.niaobulashi.core.text.StrFormatter;
+import com.niaobulashi.common.core.text.StrFormatter;
 
 import java.util.Collection;
 import java.util.Map;

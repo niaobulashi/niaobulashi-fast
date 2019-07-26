@@ -1,14 +1,58 @@
-# ������������
+# 开发环境配置
 server:
-  # ��������HTTP�˿ڣ�Ĭ��Ϊ8082
+  # 服务器的HTTP端口，默认为8082
   port: 8082
   servlet:
-    # Ӧ�õķ���·��
+    # 应用的访问路径
     context-path: /
   tomcat:
-    # tomcat��URI����
+    # tomcat的URI编码
     uri-encoding: UTF-8
-    # tomcat����߳�����Ĭ��Ϊ200
+    # tomcat最大线程数，默认为200
     max-threads: 800
-    # Tomcat������ʼ�����߳�����Ĭ��ֵ25
+    # Tomcat启动初始化的线程数，默认值25
     min-spare-threads: 30
+
+
+# 日志配置
+logging:
+  level:
+    com.niaobulashi: debug
+    org.springframework: warn
+
+# Spring配置
+spring:
+  # 模板引擎
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+  # json转换工具
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  # 指定配置文件
+  profiles:
+    active: xi
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size:  10MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.niaobulashi
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml

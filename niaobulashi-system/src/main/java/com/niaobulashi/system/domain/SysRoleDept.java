@@ -5,39 +5,43 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @program: niaobulashi-fast
- * @description: 用户和角色关联 sys_user_role
+ * @description: 角色和部门关联 sys_role_dept
  * @author: 鸟不拉屎 https://niaobulashi.com
- * @create: 2019-07-23 23:11
+ * @create: 2019-07-26 23:35
  */
-public class SysUserRole {
-
-    /** 用户ID */
-    private Long userId;
+public class SysRoleDept {
 
     /** 角色ID */
     private Long roleId;
 
-    public Long getUserId() {
-        return userId;
-    }
+    /** 部门ID */
+    private Long deptId;
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getRoleId() {
+    public Long getRoleId()
+    {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Long roleId)
+    {
         this.roleId = roleId;
+    }
+
+    public Long getDeptId()
+    {
+        return deptId;
+    }
+
+    public void setDeptId(Long deptId)
+    {
+        this.deptId = deptId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("userId", getUserId())
                 .append("roleId", getRoleId())
+                .append("deptId", getDeptId())
                 .toString();
     }
 }

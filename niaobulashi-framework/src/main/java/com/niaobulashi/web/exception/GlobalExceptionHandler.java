@@ -1,6 +1,6 @@
 package com.niaobulashi.web.exception;
 
-import com.niaobulashi.core.domain.AjaxResult;
+import com.niaobulashi.common.core.domain.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
