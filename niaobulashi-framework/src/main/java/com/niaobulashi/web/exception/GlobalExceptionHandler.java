@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-framework
  * @description: 全局异常处理qo
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-20 23:37
