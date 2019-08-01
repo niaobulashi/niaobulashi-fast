@@ -1,4 +1,4 @@
-package com.niaobulashi.web.exception;
+package com.niaobulashi.framework.web.exception;
 
 import com.niaobulashi.common.core.domain.AjaxResult;
 import org.slf4j.Logger;

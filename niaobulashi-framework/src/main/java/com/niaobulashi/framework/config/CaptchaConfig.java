@@ -1,4 +1,4 @@
-package com.niaobulashi.config;
+package com.niaobulashi.framework.config;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;

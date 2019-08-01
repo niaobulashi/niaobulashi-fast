@@ -1,4 +1,4 @@
-package com.niaobulashi.config;
+package com.niaobulashi.framework.config;
 
 import com.niaobulashi.common.utils.StringUtils;
 import net.sf.ehcache.CacheManager;
