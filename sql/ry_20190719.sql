@@ -247,7 +247,8 @@ insert into sys_menu values('1055', '任务导出', '110', '7', '#', '',  'F', '
 insert into sys_menu values('1056', '生成查询', '114', '1', '#', '',  'F', '0', 'tool:gen:list',    '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 insert into sys_menu values('1057', '生成修改', '114', '2', '#', '',  'F', '0', 'tool:gen:edit',    '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 insert into sys_menu values('1058', '生成删除', '114', '3', '#', '',  'F', '0', 'tool:gen:remove',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('1059', '生成代码', '114', '4', '#', '',  'F', '0', 'tool:gen:code',    '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('1059', '预览代码', '114', '4', '#', '',  'F', '0', 'tool:gen:preview',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('1060', '生成代码', '114', '5', '#', '',  'F', '0', 'tool:gen:code',     '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 
 
 -- ----------------------------
@@ -361,6 +362,7 @@ insert into sys_role_menu values ('2', '1056');
 insert into sys_role_menu values ('2', '1057');
 insert into sys_role_menu values ('2', '1058');
 insert into sys_role_menu values ('2', '1059');
+insert into sys_role_menu values ('2', '1060');
 
 -- ----------------------------
 -- 8、角色和部门关联表  角色1-N部门
@@ -512,7 +514,7 @@ create table sys_config (
   config_id         int(5)          not null auto_increment    comment '参数主键',
   config_name       varchar(100)    default ''                 comment '参数名称',
   config_key        varchar(100)    default ''                 comment '参数键名',
-  config_value      varchar(100)    default ''                 comment '参数键值',
+  config_value      varchar(500)    default ''                 comment '参数键值',
   config_type       char(1)         default 'N'                comment '系统内置（Y是 N否）',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time       datetime                                   comment '创建时间',
@@ -524,6 +526,7 @@ create table sys_config (
 
 insert into sys_config values(1, '主框架页-默认皮肤样式名称', 'sys.index.skinName',     'skin-blue',     'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow' );
 insert into sys_config values(2, '用户管理-账号初始密码',     'sys.user.initPassword',  '123456',        'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '初始化密码 123456' );
+insert into sys_config values(3, '主框架页-侧边栏主题',       'sys.index.sideTheme',    'theme-dark',    'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '深色主题theme-dark，浅色主题theme-light' );
 
 
 -- ----------------------------

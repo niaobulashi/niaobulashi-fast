@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-system
  * @description: 角色和菜单关联 sys_role_menu
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-23 23:20

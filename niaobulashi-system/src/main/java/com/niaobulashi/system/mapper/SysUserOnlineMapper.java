@@ -5,7 +5,7 @@ import com.niaobulashi.system.domain.SysUserOnline;
 import java.util.List;
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-system
  * @description: 在线用户 数据层
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-08-01 23:37

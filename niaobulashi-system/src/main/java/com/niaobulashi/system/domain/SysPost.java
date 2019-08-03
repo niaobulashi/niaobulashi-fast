@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-system
  * @description: 岗位表 sys_post
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-26 23:37

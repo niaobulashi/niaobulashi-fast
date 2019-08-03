@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-system
  * @description: 用户表 业务层处理层
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-23 23:27

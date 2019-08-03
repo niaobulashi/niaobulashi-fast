@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-system
  * @description: 菜单权限表 sys_menu
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-23 23:16

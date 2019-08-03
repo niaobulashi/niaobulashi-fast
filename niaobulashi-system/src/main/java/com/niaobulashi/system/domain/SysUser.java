@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-system
  * @description: 用户表 sys_user
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-23 22:53
