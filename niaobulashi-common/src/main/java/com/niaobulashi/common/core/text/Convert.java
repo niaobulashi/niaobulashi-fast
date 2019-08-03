@@ -296,6 +296,16 @@ public class Convert {
     }
 
     /**
+     * 转换为Long数组<br>
+     *
+     * @param str 被转换的值
+     * @return 结果
+     */
+    public static Long[] toLongArray(String str) {
+        return toLongArray(",", str);
+    }
+
+    /**
      * 转换为Long数组
      * @param split 分隔符
      * @param str   被转换的值

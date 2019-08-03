@@ -23,34 +23,34 @@ public class ServletUtils {
      * 获取String参数
      */
     public static String getParameter(String name) {
-        return getRequset().getParameter(name);
+        return getRequest().getParameter(name);
     }
 
     /**
      * 获取String参数，如果为空则为默认值
      */
     public static String getParameter(String name, String defaultValue) {
-        return Convert.toStr(getRequset().getParameter(name), defaultValue);
+        return Convert.toStr(getRequest().getParameter(name), defaultValue);
     }
 
     /**
      * 获取Integer参数
      */
     public static Integer getParameterToInt(String name) {
-        return Convert.toInt(getRequset().getParameter(name));
+        return Convert.toInt(getRequest().getParameter(name));
     }
 
     /**
      * 获取Integer参数，如果为空则为默认值
      */
     public static Integer getParameterToInt(String name, Integer defaultValue) {
-        return Convert.toInt(getRequset().getParameter(name), defaultValue);
+        return Convert.toInt(getRequest().getParameter(name), defaultValue);
     }
 
     /**
      * 获取request
      */
-    public static HttpServletRequest getRequset() {
+    public static HttpServletRequest getRequest() {
         return getRequestAttributes().getRequest();
     }
 
@@ -58,7 +58,7 @@ public class ServletUtils {
      * 获取session
      */
     public static HttpSession getSession() {
-        return getRequset().getSession();
+        return getRequest().getSession();
     }
 
     /**

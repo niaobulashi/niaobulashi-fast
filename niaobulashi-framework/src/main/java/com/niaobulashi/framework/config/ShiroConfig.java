@@ -1,11 +1,18 @@
 package com.niaobulashi.framework.config;
 
 import com.niaobulashi.common.utils.StringUtils;
+import com.niaobulashi.common.utils.spring.SpringUtils;
+import com.niaobulashi.framework.shiro.realm.UserRealm;
+import com.niaobulashi.framework.shiro.session.OnlineSessionDAO;
+import com.niaobulashi.framework.shiro.session.OnlineSessionFactory;
 import net.sf.ehcache.CacheManager;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.io.ResourceUtils;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.web.filter.authc.LogoutFilter;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -107,5 +114,35 @@ public class ShiroConfig {
             IOUtils.closeQuietly(inputStream);
         }
     }
+
+    /**
+     * 自定义Realm
+     */
+    @Bean
+    public UserRealm userRealm(EhCacheManager cacheManager) {
+        UserRealm userRealm = new UserRealm();
+        userRealm.setCacheManager(cacheManager);
+        return userRealm;
+    }
+
+    /**
+     * 自定义sessionDAO会话
+     */
+    @Bean
+    public OnlineSessionDAO sessionDAO() {
+        OnlineSessionDAO sessionDAO = new OnlineSessionDAO();
+        return sessionDAO;
+    }
+
+    /**
+     * 自定义sessionFactory会话
+     */
+    @Bean
+    public OnlineSessionFactory sessionFactory() {
+        OnlineSessionFactory sessionFactory = new OnlineSessionFactory();
+        return sessionFactory;
+    }
+
+
 
 }

@@ -65,7 +65,7 @@ public class BaseController {
      * 获取request
      */
     public HttpServletRequest getRequest() {
-        return ServletUtils.getRequset();
+        return ServletUtils.getRequest();
     }
 
     /**
