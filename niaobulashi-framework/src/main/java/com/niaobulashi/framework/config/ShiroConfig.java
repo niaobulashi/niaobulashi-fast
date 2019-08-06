@@ -1,27 +1,38 @@
 package com.niaobulashi.framework.config;
 
+import com.mysql.cj.log.Log;
 import com.niaobulashi.common.utils.StringUtils;
 import com.niaobulashi.common.utils.spring.SpringUtils;
 import com.niaobulashi.framework.shiro.realm.UserRealm;
 import com.niaobulashi.framework.shiro.session.OnlineSessionDAO;
 import com.niaobulashi.framework.shiro.session.OnlineSessionFactory;
+import com.niaobulashi.framework.shiro.web.filter.LogoutFilter;
+import com.niaobulashi.framework.shiro.web.filter.online.OnlineSessionFilter;
 import com.niaobulashi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.niaobulashi.framework.shiro.web.session.SpringSessionValidationScheduler;
 import net.sf.ehcache.CacheManager;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.io.ResourceUtils;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.web.filter.authc.LogoutFilter;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.CookieHandler;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * @program: niaobulashi-framework
@@ -169,6 +180,110 @@ public class ShiroConfig {
         // 自定义sessionFactory
         manager.setSessionFactory(sessionFactory());
         return manager;
+    }
+
+    /**
+     * 记住我
+     */
+    public CookieRememberMeManager rememberMeManager() {
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(rememberMeCookie());
+        cookieRememberMeManager.setCipherKey(Base64.decode("fCq+/xW488hMTCD+cmJ3aQ=="));
+        return cookieRememberMeManager;
+    }
+
+
+
+    /**
+     * 安全管理器
+     * @param userRealm
+     * @param springSessionValidationScheduler
+     * @return
+     */
+    @Bean
+    public SecurityManager securityManager(UserRealm userRealm, SpringSessionValidationScheduler springSessionValidationScheduler) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        // 设置userRealm
+        securityManager.setRealm(userRealm);
+        // 记住我
+        securityManager.setRememberMeManager(rememberMeManager());
+        // 注入缓存管理器
+        securityManager.setCacheManager(getEhCacheManager());
+        // session管理器
+        securityManager.setSessionManager(sessionManager());
+        return securityManager;
+    }
+
+    /**
+     * 退出过滤器
+     * @return
+     */
+    public LogoutFilter logoutFilter() {
+        LogoutFilter logoutFilter = new LogoutFilter();
+        logoutFilter.setCacheManager(getEhCacheManager());
+        logoutFilter.setLoginUrl(loginUrl);
+        return logoutFilter;
+    }
+
+    /**
+     * Shiro过滤器配置
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        // Shiro的核心安全接口,这个属性是必须的
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        // 身份认证失败，则跳转到登录页面的配置
+        shiroFilterFactoryBean.setLoginUrl(loginUrl);
+        // 权限认证失败，则跳转到指定页面
+        shiroFilterFactoryBean.setUnauthorizedUrl(unauthorizedUrl);
+        // Shiro连接约束配置，即过滤链的定义
+        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        // 对静态资源设置匿名访问
+        filterChainDefinitionMap.put("/favicon.ico**", "anon");
+        filterChainDefinitionMap.put("/ruoyi.png**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/docs/**", "anon");
+        filterChainDefinitionMap.put("/fonts/**", "anon");
+        filterChainDefinitionMap.put("/img/**", "anon");
+        filterChainDefinitionMap.put("/ajax/**", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/ruoyi/**", "anon");
+        filterChainDefinitionMap.put("/druid/**", "anon");
+        filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
+        // 退出logout，shiro清楚session
+        filterChainDefinitionMap.put("/logout", "logout");
+        // 不需要拦截的访问
+        filterChainDefinitionMap.put("/login", "anon,captchaValidate");
+        Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
+        // 自定义在线用户处理过滤器
+        filters.put("onlineSession", onlineSessionFilter());
+        return shiroFilterFactoryBean;
+    }
+
+    /**
+     * 自定义在线用户处理过滤器
+     */
+    @Bean
+    public OnlineSessionFilter onlineSessionFilter() {
+        OnlineSessionFilter onlineSessionFilter = new OnlineSessionFilter();
+        onlineSessionFilter.setLoginUrl(loginUrl);
+        return onlineSessionFilter;
+    }
+
+    /**
+     * Cookie 属性设置
+     * @return
+     */
+    public SimpleCookie rememberMeCookie() {
+        SimpleCookie cookie = new SimpleCookie("rememberme");
+        cookie.setDomain(domain);
+        cookie.setPath(path);
+        cookie.setHttpOnly(httpOnly);
+        cookie.setMaxAge(maxAge * 24 * 60 * 60);
+        return cookie;
     }
 
 }
