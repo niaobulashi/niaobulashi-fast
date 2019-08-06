@@ -6,7 +6,7 @@ package com.niaobulashi.common.constant;
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-08-03 17:13
  */
-public class ShiroConstants {
+public interface ShiroConstants {
 
     /**
      * 当前登录的用户

@@ -50,11 +50,17 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO {
         return sysShiroService.getSession(sessionId);
     }
 
+    /**
+     * 更新session会话
+     */
     @Override
     public void update(Session session) throws UnknownSessionException {
         super.update(session);
     }
 
+    /**
+     * 同步Session数据到Db
+     */
     public void syncToDb(OnlineSession onlineSession) {
         Date lastSyncTimestamp = (Date) onlineSession.getAttribute(LAST_SYNC_DB_TIMESTAMP);
         if (lastSyncTimestamp != null) {

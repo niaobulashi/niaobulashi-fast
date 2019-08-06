@@ -7,7 +7,9 @@ import com.niaobulashi.framework.shiro.realm.UserRealm;
 import com.niaobulashi.framework.shiro.session.OnlineSessionDAO;
 import com.niaobulashi.framework.shiro.session.OnlineSessionFactory;
 import com.niaobulashi.framework.shiro.web.filter.LogoutFilter;
+import com.niaobulashi.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
 import com.niaobulashi.framework.shiro.web.filter.online.OnlineSessionFilter;
+import com.niaobulashi.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import com.niaobulashi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.niaobulashi.framework.shiro.web.session.SpringSessionValidationScheduler;
 import net.sf.ehcache.CacheManager;
@@ -192,8 +194,6 @@ public class ShiroConfig {
         return cookieRememberMeManager;
     }
 
-
-
     /**
      * 安全管理器
      * @param userRealm
@@ -260,6 +260,10 @@ public class ShiroConfig {
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         // 自定义在线用户处理过滤器
         filters.put("onlineSession", onlineSessionFilter());
+        // 自定义在线用户同步过滤器
+        filters.put("syncOnlineSession", syncOnlineSessionFilter());
+        // 自定义验证码过滤器
+        filters.put("captchaValidate", captchaValidateFilter());
         return shiroFilterFactoryBean;
     }
 
@@ -272,6 +276,28 @@ public class ShiroConfig {
         onlineSessionFilter.setLoginUrl(loginUrl);
         return onlineSessionFilter;
     }
+
+    /**
+     * 自定义在线用户同步过滤器
+     */
+    @Bean
+    public SyncOnlineSessionFilter syncOnlineSessionFilter() {
+        SyncOnlineSessionFilter syncOnlineSessionFilter = new SyncOnlineSessionFilter();
+        return syncOnlineSessionFilter;
+    }
+
+
+    /**
+     * 自定义验证码过滤器
+     */
+    @Bean
+    public CaptchaValidateFilter captchaValidateFilter() {
+        CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
+        captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
+        captchaValidateFilter.setCaptchaType(captchaType);
+        return captchaValidateFilter;
+    }
+
 
     /**
      * Cookie 属性设置
