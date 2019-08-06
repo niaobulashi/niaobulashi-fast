@@ -5,6 +5,8 @@ import com.niaobulashi.common.utils.spring.SpringUtils;
 import com.niaobulashi.framework.shiro.realm.UserRealm;
 import com.niaobulashi.framework.shiro.session.OnlineSessionDAO;
 import com.niaobulashi.framework.shiro.session.OnlineSessionFactory;
+import com.niaobulashi.framework.shiro.web.session.OnlineWebSessionManager;
+import com.niaobulashi.framework.shiro.web.session.SpringSessionValidationScheduler;
 import net.sf.ehcache.CacheManager;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -143,6 +145,30 @@ public class ShiroConfig {
         return sessionFactory;
     }
 
-
+    /**
+     * 会话管理器
+     */
+    @Bean
+    public OnlineWebSessionManager sessionManager()
+    {
+        OnlineWebSessionManager manager = new OnlineWebSessionManager();
+        // 加入缓存管理器
+        manager.setCacheManager(getEhCacheManager());
+        // 删除过期的session
+        manager.setDeleteInvalidSessions(true);
+        // 设置全局session超时时间
+        manager.setGlobalSessionTimeout(expireTime * 60 * 1000);
+        // 去掉 JSESSIONID
+        manager.setSessionIdUrlRewritingEnabled(false);
+        // 定义要使用的无效的Session定时调度器
+        manager.setSessionValidationScheduler(SpringUtils.getBean(SpringSessionValidationScheduler.class));
+        // 是否定时检查session
+        manager.setSessionValidationSchedulerEnabled(true);
+        // 自定义SessionDao
+        manager.setSessionDAO(sessionDAO());
+        // 自定义sessionFactory
+        manager.setSessionFactory(sessionFactory());
+        return manager;
+    }
 
 }
