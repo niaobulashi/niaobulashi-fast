@@ -8,6 +8,7 @@ import com.niaobulashi.framework.shiro.session.OnlineSessionDAO;
 import com.niaobulashi.framework.shiro.session.OnlineSessionFactory;
 import com.niaobulashi.framework.shiro.web.filter.LogoutFilter;
 import com.niaobulashi.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
+import com.niaobulashi.framework.shiro.web.filter.kickout.KickoutSessionFilter;
 import com.niaobulashi.framework.shiro.web.filter.online.OnlineSessionFilter;
 import com.niaobulashi.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import com.niaobulashi.framework.shiro.web.session.OnlineWebSessionManager;
@@ -264,6 +265,15 @@ public class ShiroConfig {
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
         // 自定义验证码过滤器
         filters.put("captchaValidate", captchaValidateFilter());
+        //
+        filters.put("kickout", kickoutSessionFilter());
+        // 注销成功，则跳转到指定页面
+        filters.put("logout", logoutFilter());
+        shiroFilterFactoryBean.setFilters(filters);
+
+        // 所有请求需要认证
+        filterChainDefinitionMap.put("/**", "user,kickout,onlineSession,syncOnlineSession");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
 
@@ -286,7 +296,6 @@ public class ShiroConfig {
         return syncOnlineSessionFilter;
     }
 
-
     /**
      * 自定义验证码过滤器
      */
@@ -296,6 +305,22 @@ public class ShiroConfig {
         captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
         captchaValidateFilter.setCaptchaType(captchaType);
         return captchaValidateFilter;
+    }
+
+    /**
+     * 同一个用户多设备登录限制
+     */
+    public KickoutSessionFilter kickoutSessionFilter() {
+        KickoutSessionFilter kickoutSessionFilter = new KickoutSessionFilter();
+        kickoutSessionFilter.setCacheManager(getEhCacheManager());
+        kickoutSessionFilter.setSessionManager(sessionManager());
+        // 同一个用户最大的会话数，默认-1无限制；比如2的意思是同一个用户允许最多同时两个人登录
+        kickoutSessionFilter.setMaxSession(maxSession);
+        // 是否踢出后来登录的，默认是false；即后者登录的用户踢出前者登录的用户；踢出顺序
+        kickoutSessionFilter.setKickoutAfter(kickoutAfter);
+        // 被踢出后重定向到的地址；
+        kickoutSessionFilter.setKickoutUrl("/login?kickout=1");
+        return kickoutSessionFilter;
     }
 
 
