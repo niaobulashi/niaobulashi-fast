@@ -1,4 +1,4 @@
-package com.niaobulashi.controller.system;
+package com.niaobulashi.web.controller.system;
 
 import com.niaobulashi.common.core.controller.BaseController;
 import com.niaobulashi.common.core.page.TableDataInfo;

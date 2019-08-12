@@ -35,6 +35,39 @@ public class SysRole extends BaseEntity {
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
 
+    /** 用户是否存在此角色标识 默认不存在 */
+    private boolean flag = false;
+
+    /** 菜单组 */
+    private Long[] menuIds;
+
+    /** 部门组（数据权限） */
+    private Long[] deptIds;
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    public Long[] getMenuIds() {
+        return menuIds;
+    }
+
+    public void setMenuIds(Long[] menuIds) {
+        this.menuIds = menuIds;
+    }
+
+    public Long[] getDeptIds() {
+        return deptIds;
+    }
+
+    public void setDeptIds(Long[] deptIds) {
+        this.deptIds = deptIds;
+    }
+
     public Long getRoleId() {
         return roleId;
     }

@@ -35,6 +35,10 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
     @Override
     public void setAttribute(SessionKey sessionKey, Object attributeKey, Object value) throws InvalidSessionException {
         super.setAttribute(sessionKey, attributeKey, value);
+        if (value != null && needMarkAttributeChanged(attributeKey)) {
+            OnlineSession session = getOnlineSession(sessionKey);
+            session.markAttributeChanged();
+        }
     }
 
     private boolean needMarkAttributeChanged(Object attributeKey) {

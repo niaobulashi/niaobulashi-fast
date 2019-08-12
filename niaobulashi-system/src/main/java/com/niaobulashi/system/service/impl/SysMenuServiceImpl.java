@@ -10,6 +10,7 @@ import com.niaobulashi.system.mapper.SysMenuMapper;
 import com.niaobulashi.system.mapper.SysRoleMenuMapper;
 import com.niaobulashi.system.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.*;
@@ -20,6 +21,7 @@ import java.util.*;
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-08-03 13:23
  */
+@Service
 public class SysMenuServiceImpl implements SysMenuService {
 
     public static final String PREMISSION_STRING = "perms[\"{0}\"]";

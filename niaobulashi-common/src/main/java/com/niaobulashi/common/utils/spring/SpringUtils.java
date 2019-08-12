@@ -20,7 +20,7 @@ public class SpringUtils implements BeanFactoryPostProcessor {
     private static ConfigurableListableBeanFactory beanFactory;
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         SpringUtils.beanFactory = beanFactory;
     }
 
@@ -30,6 +30,7 @@ public class SpringUtils implements BeanFactoryPostProcessor {
      * @return Object 一个以所给名字注册的bean的实例
      * @throws org.springframework.beans.BeansException
      */
+    @SuppressWarnings("unchecked")
     public static <T> T getBean(String name) throws BeansException {
         return (T) beanFactory.getBean(name);
     }
@@ -41,7 +42,7 @@ public class SpringUtils implements BeanFactoryPostProcessor {
      * @throws org.springframework.beans.BeansException
      */
     public static <T> T getBean(Class<T> clz) throws BeansException {
-        T result = beanFactory.getBean(clz);
+        T result = (T) beanFactory.getBean(clz);
         return result;
     }
 
@@ -91,6 +92,7 @@ public class SpringUtils implements BeanFactoryPostProcessor {
      * @param <T>
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static <T> T getAopProxy (T invoker) {
         return (T) AopContext.currentProxy();
     }

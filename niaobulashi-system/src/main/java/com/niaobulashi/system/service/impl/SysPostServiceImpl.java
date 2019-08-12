@@ -19,8 +19,7 @@ import java.util.List;
  * @author ruoyi
  */
 @Service
-public class SysPostServiceImpl implements SysPostService
-{
+public class SysPostServiceImpl implements SysPostService {
     @Autowired
     private SysPostMapper postMapper;
 

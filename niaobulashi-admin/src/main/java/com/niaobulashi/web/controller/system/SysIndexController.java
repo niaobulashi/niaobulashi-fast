@@ -1,4 +1,4 @@
-package com.niaobulashi.controller.system;
+package com.niaobulashi.web.controller.system;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

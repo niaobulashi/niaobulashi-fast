@@ -11,6 +11,7 @@ import com.niaobulashi.system.domain.SysLogininfor;
 import com.niaobulashi.system.domain.SysOperLog;
 import com.niaobulashi.system.domain.SysUserOnline;
 import com.niaobulashi.system.service.SysOperLogService;
+import com.niaobulashi.system.service.SysUserOnlineService;
 import com.niaobulashi.system.service.impl.SysLogininforServiceImpl;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
@@ -49,6 +50,8 @@ public class AsyncFactory {
                 online.setBrowser(session.getBrowser());
                 online.setOs(session.getOs());
                 online.setStatus(session.getStatus());
+                SpringUtils.getBean(SysUserOnlineService.class).saveOnline(online);
+
             }
         };
     }
@@ -86,7 +89,6 @@ public class AsyncFactory {
             public void run() {
                 String address = AddressUtils.getRealAddressByIP(ip);
                 StringBuilder s = new StringBuilder();
-                s.append(LogUtils.getBlock(ip));
                 s.append(LogUtils.getBlock(ip));
                 s.append(address);
                 s.append(LogUtils.getBlock(username));

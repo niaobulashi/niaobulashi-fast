@@ -5,6 +5,7 @@ import com.niaobulashi.system.domain.SysOperLog;
 import com.niaobulashi.system.mapper.SysOperLogMapper;
 import com.niaobulashi.system.service.SysOperLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-08-03 11:10
  */
+@Service
 public class SysOperLogServiceImpl implements SysOperLogService {
 
     @Autowired

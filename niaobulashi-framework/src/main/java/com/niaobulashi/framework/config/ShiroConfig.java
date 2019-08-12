@@ -1,6 +1,6 @@
 package com.niaobulashi.framework.config;
 
-import com.mysql.cj.log.Log;
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.niaobulashi.common.utils.StringUtils;
 import com.niaobulashi.common.utils.spring.SpringUtils;
 import com.niaobulashi.framework.shiro.realm.UserRealm;
@@ -20,10 +20,12 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.io.ResourceUtils;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,9 +34,7 @@ import javax.servlet.Filter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.CookieHandler;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -197,9 +197,6 @@ public class ShiroConfig {
 
     /**
      * 安全管理器
-     * @param userRealm
-     * @param springSessionValidationScheduler
-     * @return
      */
     @Bean
     public SecurityManager securityManager(UserRealm userRealm, SpringSessionValidationScheduler springSessionValidationScheduler) {
@@ -241,7 +238,7 @@ public class ShiroConfig {
         // 权限认证失败，则跳转到指定页面
         shiroFilterFactoryBean.setUnauthorizedUrl(unauthorizedUrl);
         // Shiro连接约束配置，即过滤链的定义
-        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 对静态资源设置匿名访问
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/ruoyi.png**", "anon");
@@ -254,7 +251,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
-        // 退出logout，shiro清楚session
+        // 退出logout，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问
         filterChainDefinitionMap.put("/login", "anon,captchaValidate");
@@ -336,5 +333,22 @@ public class ShiroConfig {
         cookie.setMaxAge(maxAge * 24 * 60 * 60);
         return cookie;
     }
+    /**
+     * thymeleaf模板引擎和shiro框架的整合
+     */
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
+    }
 
+    /**
+     * 开启Shiro注解通知器
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(
+            @Qualifier("securityManager") SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
 }

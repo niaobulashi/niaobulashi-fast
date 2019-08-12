@@ -47,8 +47,7 @@ public class IpUtils {
         return internalIp(addr) || "127.0.0.1".equals(ip);
     }
 
-    private static boolean internalIp(byte[] addr)
-    {
+    private static boolean internalIp(byte[] addr) {
         if (StringUtils.isNull(addr) || addr.length < 2) {
             return true;
         }
@@ -158,8 +157,7 @@ public class IpUtils {
     public static String getHostIp() {
         try {
             return InetAddress.getLocalHost().getHostAddress();
-        }
-        catch (UnknownHostException e) {
+        } catch (UnknownHostException e) {
         }
         return "127.0.0.1";
     }

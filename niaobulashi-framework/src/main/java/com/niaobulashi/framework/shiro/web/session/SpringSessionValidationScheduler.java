@@ -18,11 +18,11 @@ import java.util.concurrent.TimeUnit;
  * @program: niaobulashi-fast
  * @description: 自定义任务调度器完成
  * @author: hulang  hulang6666@qq.com
- * @create: 2019-08-05 10:42
+ * @create: 2019-08-12 17:35
  */
 @Component
 public class SpringSessionValidationScheduler implements SessionValidationScheduler {
-    private static final Logger loggger = LoggerFactory.getLogger(SpringSessionValidationScheduler.class);
+    private static final Logger log = LoggerFactory.getLogger(SpringSessionValidationScheduler.class);
 
     public static final long DEFAULT_SESSION_VALIDATION_INTERVAL = DefaultSessionManager.DEFAULT_SESSION_VALIDATION_INTERVAL;
 
@@ -42,7 +42,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
     @Qualifier("sessionManager")
     private ValidatingSessionManager sessionManager;
 
-    /** 相隔多久检查一次session的有效性，单位毫秒，默认就是10分钟 */
+    // 相隔多久检查一次session的有效性，单位毫秒，默认就是10分钟
     @Value("${shiro.session.validationInterval}")
     private long sessionValidationInterval;
 
@@ -53,7 +53,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
 
     /**
      * Specifies how frequently (in milliseconds) this Scheduler will call the
-     * {@link ValidatingSessionManager#validateSessions()
+     * {@link org.apache.shiro.session.mgt.ValidatingSessionManager#validateSessions()
      * ValidatingSessionManager#validateSessions()} method.
      *
      * <p>
@@ -70,11 +70,10 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
      */
     @Override
     public void enableSessionValidation() {
-
         enabled = true;
 
-        if (loggger.isDebugEnabled()) {
-            loggger.debug("Scheduling session validation job using Spring Scheduler with "
+        if (log.isDebugEnabled()) {
+            log.debug("Scheduling session validation job using Spring Scheduler with "
                     + "session validation interval of [" + sessionValidationInterval + "]ms...");
         }
 
@@ -90,21 +89,20 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
 
             this.enabled = true;
 
-            if (loggger.isDebugEnabled()) {
-                loggger.debug("Session validation job successfully scheduled with Spring Scheduler.");
+            if (log.isDebugEnabled()) {
+                log.debug("Session validation job successfully scheduled with Spring Scheduler.");
             }
-
         } catch (Exception e) {
-            if (loggger.isErrorEnabled()) {
-                loggger.error("Error starting the Spring Scheduler session validation job.  Session validation may not occur.", e);
+            if (log.isErrorEnabled()) {
+                log.error("Error starting the Spring Scheduler session validation job.  Session validation may not occur.", e);
             }
         }
     }
 
     @Override
     public void disableSessionValidation() {
-        if (loggger.isDebugEnabled()) {
-            loggger.debug("Stopping Spring Scheduler session validation job...");
+        if (log.isDebugEnabled()) {
+            log.debug("Stopping Spring Scheduler session validation job...");
         }
 
         if (this.enabled) {
@@ -113,3 +111,4 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
         this.enabled = false;
     }
 }
+

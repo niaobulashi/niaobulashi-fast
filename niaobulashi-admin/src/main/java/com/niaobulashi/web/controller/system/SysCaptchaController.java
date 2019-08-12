@@ -1,4 +1,4 @@
-package com.niaobulashi.controller.system;
+package com.niaobulashi.web.controller.system;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;

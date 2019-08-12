@@ -1,5 +1,8 @@
 package com.niaobulashi.framework.shiro.session;
 
+import com.niaobulashi.common.enums.OnlineStatus;
+import com.niaobulashi.framework.manager.AsyncManager;
+import com.niaobulashi.framework.manager.factory.AsyncFactory;
 import com.niaobulashi.framework.shiro.service.SysShiroService;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
@@ -90,5 +93,19 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO {
         if (onlineSession.isAttributeChanged()) {
             onlineSession.resetAttributeChanged();
         }
+        AsyncManager.me().execute(AsyncFactory.syncSessionToDb(onlineSession));
+    }
+
+    /**
+     * 当会话过期/停止（如用户退出时）属性等会调用
+     */
+    @Override
+    protected void doDelete(Session session) {
+        OnlineSession onlineSession = (OnlineSession) session;
+        if (null == onlineSession) {
+            return;
+        }
+        onlineSession.setStatus(OnlineStatus.off_line);
+        sysShiroService.deleteSession(onlineSession);
     }
 }

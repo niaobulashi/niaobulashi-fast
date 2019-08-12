@@ -28,6 +28,10 @@ public class ShiroUtils {
         return SecurityUtils.getSubject().getSession();
     }
 
+    public static void logout() {
+        getSubject().logout();
+    }
+
     public static SysUser getSysUser() {
         SysUser user = null;
         Object obj = getSubject().getPrincipal();

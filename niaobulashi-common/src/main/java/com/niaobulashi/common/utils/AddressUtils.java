@@ -26,6 +26,10 @@ public class AddressUtils {
      */
     public static String getRealAddressByIP(String ip) {
         String address = "XX XX";
+        // 判断ip是否为空
+        if (StringUtils.isEmpty(ip)) {
+            return "ip为空";
+        }
         // 内网不查询
         if (IpUtils.internalIp(ip)) {
             return "内网IP";
