@@ -16,6 +16,7 @@ body.signin {
 }
 .loginDiv {
     margin:0 auto;
+    width: 343px;
 }
 .signinpanel .logopanel {
     float:none;
@@ -71,7 +72,7 @@ body.signin {
         padding:20px
     }
     .signinpanel form {
-        margin-top:20px
+        margin-top:154px
     }
     .signup-footer,.signuppanel .form-control {
         margin-bottom:10px
