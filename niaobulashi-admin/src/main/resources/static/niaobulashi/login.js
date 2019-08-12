@@ -6,6 +6,29 @@ $(function() {
 		var url = ctx + "captcha/captchaImage?type=" + captchaType + "&s=" + Math.random();
 		$(".imgcode").attr("src", url);
 	});
+    $('.greeting').css('display','none');
+    $('.blindfold').css('display','none');
+});
+
+// 鼠标在输入用户名时，图片样式变化
+$(".uname").focus(function() {
+    $('.normal').css('display','none');
+    $('.greeting').css('display','block');
+    $('.blindfold').css('display','none');
+}).blur(function() {
+    $('.normal').css('display','block');
+    $('.greeting').css('display','none');
+    $('.blindfold').css('display','none');
+});
+// 鼠标在输入密码时，图片样式变化
+$(".pword").focus(function() {
+    $('.normal').css('display','none');
+    $('.greeting').css('display','none');
+    $('.blindfold').css('display','block');
+}).blur(function() {
+    $('.normal').css('display','block');
+    $('.greeting').css('display','none');
+    $('.blindfold').css('display','none');
 });
 
 $.validator.setDefaults({

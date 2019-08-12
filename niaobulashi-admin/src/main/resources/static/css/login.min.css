@@ -18,6 +18,30 @@ body.signin {
     margin:0 auto;
     width: 343px;
 }
+.panfish .normal {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 15rem;
+    transform: translate(-50%,50%);
+    z-index: 1;
+}
+.panfish .greeting {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 15rem;
+    transform: translate(-50%,32%);
+    z-index: 1;
+}
+.panfish .blindfold {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 15rem;
+    transform: translate(-50%,50%);
+    z-index: 1;
+}
 .signinpanel .logopanel {
     float:none;
     width:auto;

@@ -10,7 +10,7 @@
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
     <link href="../static/css/login.min.css" th:href="@{/css/login.min.css}" rel="stylesheet"/>
-    <link href="../static/ruoyi/css/ry-ui.css" th:href="@{/ruoyi/css/ry-ui.css?v=3.4.0}" rel="stylesheet"/>
+    <link href="../static/niaobulashi/css/ry-ui.css" th:href="@{/niaobulashi/css/ry-ui.css?v=3.4.0}" rel="stylesheet"/>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -23,12 +23,17 @@
 
 <body class="signin">
     <div class="signinpanel">
+        <div class="panfish">
+            <img class="normal"     src="../static/img/login/normal.png"    th:src="@{/img/login/normal.png}">
+            <img class="greeting"   src="../static/img/login/greeting.png"  th:src="@{/img/login/greeting.png}" style="display: none;"/>
+            <img class="blindfold"  src="../static/img/login/blindfold.png" th:src="@{/img/login/blindfold.png}" style="display: none;"/>
+        </div>
         <div class="loginDiv">
             <form id="signupForm">
                 <h4 class="no-margins">登录：</h4>
                 <p class="m-t-md">你若不离不弃，我必生死相依</p>
-                <input type="text"     name="username" class="form-control uname"     placeholder="用户名" value="admin"    />
-                <input type="password" name="password" class="form-control pword"     placeholder="密码"   value="admin123" />
+                <input type="text"     name="username" class="form-control uname" placeholder="用户名"/>
+                <input type="password" name="password" class="form-control pword" placeholder="密码"/>
                 <div class="row m-t" th:if="${captchaEnabled==true}">
                     <div class="col-xs-6">
                         <input type="text" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5" autocomplete="off">
@@ -60,7 +65,7 @@
 <script src="../static/ajax/libs/validate/messages_zh.min.js" th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
 <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-<script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=3.4.0}"></script>
-<script src="../static/ruoyi/login.js" th:src="@{/ruoyi/login.js}"></script>
+<script src="../static/niaobulashi/js/ry-ui.js" th:src="@{/niaobulashi/js/ry-ui.js?v=3.4.0}"></script>
+<script src="../static/niaobulashi/login.js" th:src="@{/niaobulashi/login.js}"></script>
 </body>
 </html>
