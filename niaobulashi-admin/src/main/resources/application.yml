@@ -57,7 +57,7 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-  # 指定配置文件
+  # 指定数据库连接配置文件
   profiles:
     active: xi
   # 文件上传
@@ -99,7 +99,7 @@ shiro:
     # 首页地址
     indexUrl: /index
     # 验证码开关
-    captchaEnabled: true
+    captchaEnabled: false
     # 验证码类型 math 数组计算 char 字符
     captchaType: math
   cookie:

@@ -44,6 +44,7 @@ function login() {
 
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
+    // 表单必输项校验
     $("#signupForm").validate({
         rules: {
             username: {
