@@ -20,6 +20,7 @@ $(".uname").focus(function() {
     $('.greeting').css('display','none');
     $('.blindfold').css('display','none');
 });
+
 // 鼠标在输入密码时，图片样式变化
 $(".pword").focus(function() {
     $('.normal').css('display','none');
@@ -30,6 +31,7 @@ $(".pword").focus(function() {
     $('.greeting').css('display','none');
     $('.blindfold').css('display','none');
 });
+
 // 鼠标到输入验证码时，图片样式变化
 $(".code").focus(function() {
     $('.normal').css('display','none');

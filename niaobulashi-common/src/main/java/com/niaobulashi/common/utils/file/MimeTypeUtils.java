@@ -1,7 +1,7 @@
 package com.niaobulashi.common.utils.file;
 
 /**
- * @program: niaobulashi-fast
+ * @program: niaobulashi-common
  * @description: 媒体类型工具类
  * @author: hulang  hulang6666@qq.com
  * @create: 2019-08-13 19:31

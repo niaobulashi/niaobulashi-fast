@@ -3,13 +3,8 @@ package com.niaobulashi.common.exception.file;
 import com.niaobulashi.common.exception.base.BaseException;
 
 /**
- * 文件信息异常类
- * 
- * @author ruoyi
- */
-/**
  * @program: niaobulashi-common
- * @description: 基础异常
+ * @description: 文件信息异常类
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-08-01 23:16
  */
