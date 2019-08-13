@@ -30,6 +30,16 @@ $(".pword").focus(function() {
     $('.greeting').css('display','none');
     $('.blindfold').css('display','none');
 });
+// 鼠标到输入验证码时，图片样式变化
+$(".code").focus(function() {
+    $('.normal').css('display','none');
+    $('.greeting').css('display','block');
+    $('.blindfold').css('display','none');
+}).blur(function() {
+    $('.normal').css('display','block');
+    $('.greeting').css('display','none');
+    $('.blindfold').css('display','none');
+});
 
 $.validator.setDefaults({
     submitHandler: function() {
@@ -53,7 +63,7 @@ function login() {
             "rememberMe": rememberMe
         },
         success: function(r) {
-            if (r.code == 0) {
+            if (r.code == 100) {
                 location.href = ctx + 'index';
             } else {
             	$.modal.closeLoading();

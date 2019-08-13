@@ -18,6 +18,9 @@ body.signin {
     margin:0 auto;
     width: 343px;
 }
+.writecolor{
+    background: #fff;
+}
 .panfish .normal {
     position: absolute;
     top: 0;
