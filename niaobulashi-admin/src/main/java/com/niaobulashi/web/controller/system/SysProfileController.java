@@ -51,6 +51,11 @@ public class SysProfileController extends BaseController {
         return prefix + "/profile";
     }
 
+    /**
+     * 检查密码
+     * @param password
+     * @return
+     */
     @GetMapping("/checkPassword")
     @ResponseBody
     public boolean checkPassword(String password) {
@@ -61,6 +66,11 @@ public class SysProfileController extends BaseController {
         return false;
     }
 
+    /**
+     * 重置密码
+     * @param mmap
+     * @return
+     */
     @GetMapping("/resetPwd")
     public String resetPwd(ModelMap mmap) {
         SysUser user = ShiroUtils.getSysUser();
