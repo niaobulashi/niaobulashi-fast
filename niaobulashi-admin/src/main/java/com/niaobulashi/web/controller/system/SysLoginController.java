@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SysLoginController extends BaseController {
 
     /**
-     * 登录
+     * 未登录
      * @param request
      * @param response
      * @return
@@ -39,6 +39,13 @@ public class SysLoginController extends BaseController {
         return "login";
     }
 
+    /**
+     * 登录
+     * @param username 登录名
+     * @param password 密码
+     * @param rememberMe 记住我
+     * @return
+     */
     @PostMapping("/login")
     @ResponseBody
     public AjaxResult ajaxLogin(String username, String password, Boolean rememberMe) {
@@ -56,6 +63,10 @@ public class SysLoginController extends BaseController {
         }
     }
 
+    /**
+     * 未授权
+     * @return
+     */
     @GetMapping("/unauth")
     public String unauth() {
         return "/error/unauth";

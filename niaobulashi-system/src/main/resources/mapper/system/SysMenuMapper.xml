@@ -56,7 +56,9 @@
 
     <!-- 查询系统正常显示菜单（不含按钮） -->
     <select id="selectMenuNormalAll" resultMap="SysMenuResult">
-		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.visible, ifnull(m.perms,'') as perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.visible,
+		                ifnull(m.perms,'') as perms, m.target, m.menu_type, m.icon,
+		                m.order_num, m.create_time
 		from sys_menu m
 		where m.menu_type in ('M', 'C') and m.visible = 0
 		order by m.parent_id, m.order_num

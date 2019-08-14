@@ -19,7 +19,7 @@ import java.io.IOException;
  * @author: hulang  hulang6666@qq.com
  * @create: 2019-08-13 19:17
  */
-    public class FileUploadUtils {
+public class FileUploadUtils {
 
     /** 默认上传文件大小 */
     public static final long DEFAULT_MAX_SIZE = 50 * 1024 * 1024;
@@ -53,6 +53,7 @@ import java.io.IOException;
             throw new IOException(e.getMessage(), e);
         }
     }
+
     /**
      * 根据文件路径上传
      * @param baseDir 相对应用的基目录
@@ -67,6 +68,7 @@ import java.io.IOException;
             throw new IOException(e.getMessage(), e);
         }
     }
+
     /**
      * 文件上传
      * @param baseDir 相对应的根目录
@@ -94,6 +96,7 @@ import java.io.IOException;
         String pathFileName = getPathFileName(baseDir, fileName);
         return pathFileName;
     }
+
     /**
      * 编码文件名
      * @param file
@@ -105,6 +108,7 @@ import java.io.IOException;
         fileName = DateUtils.datePath() + "/" + encodingFileName(fileName) + "." + extension;
         return fileName;
     }
+
     /**
      * 获取带有绝对路径的文件
      * @param uploadDir
@@ -122,6 +126,7 @@ import java.io.IOException;
         }
         return file;
     }
+
     /**
      * 获取带有路径的文件
      * @param uploadDir

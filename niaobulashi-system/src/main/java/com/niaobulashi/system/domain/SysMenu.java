@@ -4,6 +4,9 @@ import com.niaobulashi.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @program: niaobulashi-system
  * @description: 菜单权限表 sys_menu
@@ -46,6 +49,9 @@ public class SysMenu extends BaseEntity {
 
     /** 菜单图标 */
     private String icon;
+
+    /** 子菜单 */
+    private List<SysMenu> children = new ArrayList<SysMenu>();
 
     public Long getMenuId() {
         return menuId;
@@ -155,5 +161,13 @@ public class SysMenu extends BaseEntity {
                 .append("updateTime", getUpdateTime())
                 .append("remark", getRemark())
                 .toString();
+    }
+
+    public List<SysMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysMenu> children) {
+        this.children = children;
     }
 }

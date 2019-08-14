@@ -43,12 +43,12 @@ public class SysMenuServiceImpl implements SysMenuService {
         // 管理端显示所有信息
         if (user.isAdmin()) {
             // 查询系统正常显示菜单（不含按钮）
-            menuMapper.selectMenuNormalAll();
+            menus = menuMapper.selectMenuNormalAll();
         } else {
             // 根据用户ID查询菜单
-            menuMapper.selectMenuAllByUserId(user.getUserId());
+            menus = menuMapper.selectMenuAllByUserId(user.getUserId());
         }
-        return null;
+        return getChildPerms(menus, 0);
     }
 
     /**
@@ -279,6 +279,53 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     /**
+     * 根据父节点的ID获取所有子节点
+     * @param list 分类表
+     * @param parentId 传入的父节点ID
+     * @return
+     */
+    private List<SysMenu> getChildPerms(List<SysMenu> list, int parentId) {
+        List<SysMenu> returnList = new ArrayList<SysMenu>();
+        for (Iterator<SysMenu> iterator = list.iterator(); iterator.hasNext();) {
+            SysMenu t = iterator.next();
+            // 根据传入的某个父节点，遍历该父节点的所有子节点
+            if (t.getParentId() == parentId) {
+                recursionFn(list, t);
+                returnList.add(t);
+            }
+        }
+        return returnList;
+    }
+
+    /**
+     * 递归列表
+     * @param list
+     * @param t
+     */
+    private void recursionFn(List<SysMenu> list, SysMenu t) {
+        // 得到子节点列表
+        List<SysMenu> childList = getChildList(list, t);
+        t.setChildren(childList);
+        for (SysMenu tChild : childList) {
+            // 判断是否有子节点
+            if (hasChild(list, tChild)) {
+                Iterator<SysMenu> it = childList.iterator();
+                while (it.hasNext()) {
+                    SysMenu n = it.next();
+                    recursionFn(list, n);
+                }
+            }
+        }
+    }
+
+    /**
+     * 判断是否有子节点
+     */
+    private boolean hasChild(List<SysMenu> list, SysMenu t) {
+        return getChildList(list, t).size() > 0 ? true : false;
+    }
+
+    /**
      * 得到子节点列表
      */
     private List<SysMenu> getChildList(List<SysMenu> list, SysMenu t) {
@@ -291,12 +338,5 @@ public class SysMenuServiceImpl implements SysMenuService {
             }
         }
         return tlist;
-    }
-
-    /**
-     * 判断是否有子节点
-     */
-    private boolean hasChild(List<SysMenu> list, SysMenu t) {
-        return getChildList(list, t).size() > 0 ? true : false;
     }
 }

@@ -294,6 +294,12 @@
 	margin: 5px 0 5px -25px
 }
 
+@media ( min-width : 768px) {
+	.section-content .about {
+		padding-left: 0px
+	}
+}
+
 /** select2 样式修改 **/
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
 	background-color: #1AB394;
@@ -327,6 +333,11 @@ label.error {
 .input-group label.error {
 	z-index:99;
 	right: 42px
+}
+
+.input-group.date label.error {
+	z-index:99;
+	right: 3px
 }
 
 .Validform_error,input.error,select.error {
@@ -923,7 +934,7 @@ label {
 	padding-bottom:5px
 }
 
-.form-content {
+.main-content {
     background-color: #ffffff;
     color: inherit;
     padding: 10px 15px 15px 15px;
@@ -962,4 +973,20 @@ label {
 .fixed-table-container .selected {
     background-color: #E8F7FD;
     color: #1890ff;
+}
+
+/** 滚动条样式 **/
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	background-color: #999;
 }

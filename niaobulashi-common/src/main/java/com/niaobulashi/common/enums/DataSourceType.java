@@ -6,8 +6,7 @@ package com.niaobulashi.common.enums;
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-08-01 23:16
  */
-public enum DataSourceType
-{
+public enum DataSourceType {
     /**
      * 主库
      */
