@@ -248,7 +248,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/img/login/**", "anon");
         filterChainDefinitionMap.put("/ajax/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/niaobulashi/**", "anon");
+        filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
         // 退出logout，shiro去清除session
@@ -262,7 +262,7 @@ public class ShiroConfig {
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
         // 自定义验证码过滤器
         filters.put("captchaValidate", captchaValidateFilter());
-        //
+        // 同一个用户多设备登录限制
         filters.put("kickout", kickoutSessionFilter());
         // 注销成功，则跳转到指定页面
         filters.put("logout", logoutFilter());
