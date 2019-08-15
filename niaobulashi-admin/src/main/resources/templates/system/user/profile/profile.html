@@ -141,6 +141,70 @@
     <th:block th:include="include :: footer" />
     <script>
 
+        // 用户信息-修改
+        $("#form-user-edit").validate({
+            onKeyup: false,
+            rules:{
+                userName:{
+                    required: true,
+                },
+                email:{
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: ctx + "system/user/checkEmailUnique",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "userId": function () {
+                                return $("#userId").val();
+                            },
+                            "email": function () {
+                                return $.common.trim($("#email").val());
+                            }
+                        },
+                        dataFilter: function (data, type) {
+                            return $.validate.unique(data);
+                        }
+                    }
+                },
+                phonenumber:{
+                    required:true,
+                    isPhone:true,
+                    remote: {
+                        url: ctx + "system/user/checkPhoneUnique",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "userId": function() {
+                                return $("#userId").val();
+                            },
+                            "phonenumber": function() {
+                                return $.common.trim($("#phonenumber").val());
+                            }
+                        },
+                        dataFilter: function (data, type) {
+                            return $.validate.unique(data);
+                        }
+                    }
+                },
+            },
+            messages: {
+                "userName": {
+                    required: "请输入用户名称",
+                },
+                "email": {
+                    required: "请输入邮箱",
+                    remote: "Email已经存在"
+                },
+                "phonenumber":{
+                    required: "请输入手机号码",
+                    remote: "手机号码已经存在"
+                }
+            },
+            focusCleanup: true
+        });
+
         // 修改基本资料信息
         function submitUserInfo() {
             if ($.validate.form()) {
