@@ -12,7 +12,6 @@ import java.util.List;
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-08-03 12:58
  */
-@Mapper
 public interface SysMenuMapper {
 
     /**

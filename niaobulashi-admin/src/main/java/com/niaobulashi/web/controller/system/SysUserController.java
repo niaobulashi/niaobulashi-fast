@@ -38,4 +38,31 @@ public class SysUserController extends BaseController {
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
     }
+
+    /**
+     * 校验用户名称是否唯一
+     */
+    @PostMapping("/checkLoginNameUnique")
+    @ResponseBody
+    public String checkLoginNameUnique(SysUser user) {
+        return userService.checkLoginNameUnique(user.getLoginName());
+    }
+
+    /**
+     * 校验手机号码是否唯一
+     */
+    @PostMapping("/checkPhoneUnique")
+    @ResponseBody
+    public String checkPhoneUnique(SysUser user) {
+        return userService.checkPhoneUnique(user);
+    }
+
+    /**
+     * 校验email是否唯一
+     */
+    @PostMapping("/checkEmailUnique")
+    @ResponseBody
+    public String checkEmailUnique(SysUser user) {
+        return userService.checkEmailUnique(user);
+    }
 }

@@ -11,7 +11,6 @@ import java.util.List;
  * @author: 鸟不拉屎 https://niaobulashi.com
  * @create: 2019-07-23 23:24
  */
-@Mapper
 public interface SysUserMapper {
 
     /**
