@@ -65,7 +65,7 @@ function login() {
             "rememberMe": rememberMe
         },
         success: function(r) {
-            if (r.code == 100) {
+            if (r.code == 0) {
                 location.href = ctx + 'index';
             } else {
             	$.modal.closeLoading();

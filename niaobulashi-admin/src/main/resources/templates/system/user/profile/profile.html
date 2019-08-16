@@ -141,75 +141,130 @@
     <th:block th:include="include :: footer" />
     <script>
 
-        // 用户信息-修改
-        $("#form-user-edit").validate({
-            onKeyup: false,
-            rules:{
-                userName:{
-                    required: true,
-                },
-                email:{
-                    required: true,
-                    email: true,
-                    remote: {
-                        url: ctx + "system/user/checkEmailUnique",
-                        type: "post",
-                        dataType: "json",
-                        data: {
-                            "userId": function () {
-                                return $("#userId").val();
-                            },
-                            "email": function () {
-                                return $.common.trim($("#email").val());
-                            }
-                        },
-                        dataFilter: function (data, type) {
-                            return $.validate.unique(data);
-                        }
-                    }
-                },
-                phonenumber:{
-                    required:true,
-                    isPhone:true,
-                    remote: {
-                        url: ctx + "system/user/checkPhoneUnique",
-                        type: "post",
-                        dataType: "json",
-                        data: {
-                            "userId": function() {
-                                return $("#userId").val();
-                            },
-                            "phonenumber": function() {
-                                return $.common.trim($("#phonenumber").val());
-                            }
-                        },
-                        dataFilter: function (data, type) {
-                            return $.validate.unique(data);
-                        }
-                    }
-                },
-            },
-            messages: {
-                "userName": {
-                    required: "请输入用户名称",
-                },
-                "email": {
-                    required: "请输入邮箱",
-                    remote: "Email已经存在"
-                },
-                "phonenumber":{
-                    required: "请输入手机号码",
-                    remote: "手机号码已经存在"
-                }
-            },
-            focusCleanup: true
-        });
+
+
 
         // 修改基本资料信息
         function submitUserInfo() {
-            console.log("ctx=" + ctx);
+
+            // 用户信息-修改
+            $("#form-user-edit").validate({
+                onKeyup: false,
+                rules:{
+                    userName:{
+                        required: true,
+                    },
+                    email:{
+                        required: true,
+                        email: true,
+                        remote: {
+                            url: ctx + "system/user/checkEmailUnique",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                "userId": function () {
+                                    return $("#userId").val();
+                                },
+                                "email": function () {
+                                    return $.common.trim($("#email").val());
+                                }
+                            },
+                            dataFilter: function (data, type) {
+                                return $.validate.unique(data);
+                            }
+                        }
+                    },
+                    phonenumber:{
+                        required:true,
+                        isPhone:true,
+                        remote: {
+                            url: ctx + "system/user/checkPhoneUnique",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                "userId": function() {
+                                    return $("#userId").val();
+                                },
+                                "phonenumber": function() {
+                                    return $.common.trim($("#phonenumber").val());
+                                }
+                            },
+                            dataFilter: function (data, type) {
+                                return $.validate.unique(data);
+                            }
+                        }
+                    },
+                },
+                messages: {
+                    "userName": {
+                        required: "请输入用户名称",
+                    },
+                    "email": {
+                        required: "请输入邮箱",
+                        remote: "Email已经存在"
+                    },
+                    "phonenumber":{
+                        required: "请输入手机号码",
+                        remote: "手机号码已经存在"
+                    }
+                },
+                focusCleanup: true
+            });
             if ($.validate.form()) {
                  $.operate.saveModal(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
+            }
+        }
+
+
+        // 重置密码
+        function submitChangPassword() {
+            // 用户管理-修改密码
+            $("#form-user-resetPwd").validate({
+                onKeyup: false,
+                rules: {
+                    oldPassword: {
+                        required: true,
+                        remote: {
+                            url: ctx + "system/user/profile/checkPassword",
+                            type: "get",
+                            dataType: "json",
+                            data: {
+                                password: function() {
+                                    return $("input[name='oldPassword']").val();
+                                }
+                            }
+                        }
+                    },
+                    newPassword: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 20
+                    },
+                    confirmPassword: {
+                        required: true,
+                        equalTo: "#newPassword",
+                    }
+                },
+                messages: {
+                    oldPassword: {
+                        required: "请输入原密码",
+                        remote: "原密码错误"
+                    },
+                    newPassword: {
+                        required: "请输入新密码",
+                        minlength: "密码不能小于6个字符",
+                        maxlength: "密码不能大于20个字符"
+                    },
+                    confirmPassword: {
+                        required: "请再次输入新密码",
+                        equalTo: "再次输入密码不一致"
+                    }
+                },
+                focusCleanup: true
+            });
+
+            if ($.validate.form("form-user-resetPwd")) {
+                $.operate.saveModal(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
             }
         }
     </script>
