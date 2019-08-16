@@ -209,7 +209,7 @@
         function submitUserInfo() {
             console.log("ctx=" + ctx);
             if ($.validate.form()) {
-                 $.operate.saveModal(ctx + "/system/user/profile/update123", $('#form-user-edit').serialize());
+                 $.operate.saveModal(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
             }
         }
     </script>
