@@ -16,7 +16,7 @@
                     <div class="ibox-content">
                         <div class="text-center">
                             <p><img class="img-circle img-lg" th:src="(${user.avatar} == '') ? @{/img/profile.png} : @{${user.avatar}}"></p>
-                            <p><a href="javascript:avater()">修改头像</a></p>
+                            <p><a href="javascript:avatar()">修改头像</a></p>
                         </div>
                         <ur class="list-group list-group-striped">
                             <li class="list-group-item"><i class="fa fa-user"></i>
@@ -140,9 +140,11 @@
     </section>
     <th:block th:include="include :: footer" />
     <script>
-
-
-
+        /*用户管理-头像*/
+        function avatar() {
+            var url = ctx + 'system/user/profile/avatar';
+            $.modal.open("修改头像", url);
+        }
 
         // 修改基本资料信息
         function submitUserInfo() {
@@ -264,7 +266,29 @@
             });
 
             if ($.validate.form("form-user-resetPwd")) {
-                $.operate.saveModal(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
+                // $.operate.saveModal(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
+                $.ajax({
+                    url: ctx + "system/user/profile/resetPwd",
+                    type: "post",
+                    dataType: "json",
+                    data: $('#form-user-resetPwd').serialize(),
+                    beforeSend: function () {
+                        $.modal.loading("正在处理中，请稍后...");
+                    },
+                    success: function(result) {
+                        if (typeof callback == "function") {
+                            callback(result);
+                        }
+                        if (result.code == web_status.SUCCESS) {
+                            $.modal.alertSuccess(result.msg);
+                        } else if (result.code == web_status.WARNING) {
+                            $.modal.alertWarning(result.msg)
+                        } else {
+                            $.modal.alertError(result.msg);
+                        }
+                        $.modal.closeLoading();
+                    }
+                });
             }
         }
     </script>
