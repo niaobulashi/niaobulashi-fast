@@ -57,6 +57,11 @@
         where dict_type = #{dictType}
     </select>
 
+    <select id="selectDictTypeByType" parameterType="String" resultMap="SysDictTypeResult">
+        <include refid="selectDictTypeVo"/>
+        where dict_type = #{dictType}
+    </select>
+
     <!-- 通过字典ID删除字典信息 -->
     <delete id="deleteDictTypeById" parameterType="Long">
  		delete from sys_dict_type where dict_id = #{dictId}
